@@ -4,3 +4,5 @@ In this repository you can find a presentation about a reactive state concept in
 
 The slides can be found here:
 
+https://pkief.github.io/angular-reactive-state-slides
+
