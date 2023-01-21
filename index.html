@@ -30,7 +30,7 @@
         </section>
         <section>
           <section>
-            <h2>What is a State?</h2>
+            <h2>What is a State? 🧐</h2>
           </section>
           <section>
             <img src="./imgs/state-function.png" alt="State Function" />
@@ -54,29 +54,344 @@
         </section>
 
         <section>
-          <section><h2>Known State Management Patterns</h2></section>
+          <h2>Angular State Management</h2>
+          <div class="content-cards">
+            <div class="content-card-wrapper fragment" data-fragment-index="1">
+              <div class="cards yellow">
+                <div class="content-card fragment" data-fragment-index="2">
+                  <img
+                    src="./imgs/angular.svg"
+                    width="100px"
+                    alt="Local State"
+                  />
+                  <span>Component State</span>
+                </div>
+              </div>
+              <span class="yellow">Local State</span>
+            </div>
+
+            <div class="content-card-wrapper fragment" data-fragment-index="3">
+              <div class="cards red">
+                <div class="content-card fragment" data-fragment-index="4">
+                  <img
+                    src="./imgs/ngrx.svg"
+                    width="100px"
+                    alt="NgRx Store Logo"
+                  />
+                  <span>NgRx Store</span>
+                </div>
+                <div class="content-card fragment" data-fragment-index="5">
+                  <img src="./imgs/rxjs.png" width="100px" alt="Rxjs Logo" />
+                  <span>Reactive State</span>
+                </div>
+              </div>
+              <span class="red">Global State</span>
+            </div>
+          </div>
+        </section>
+        <section>
           <section>
-            <h3>Local state</h3>
+            <h3>Local State Example</h3>
+            <pre><code data-line-numbers="2|4-6|8-15" class="typescript">export class AppComponent {
+  todos: Todo[] = [];
+
+  addTodo(description: string) {
+    this.todos.push({ completed: false, description });
+  }
+
+  setTodoCompleteState(todo: Todo, completed: boolean) {
+    this.todos = this.todos.map(t => {
+      if (t.id === todo.id) {
+        todo.completed = completed;
+      }
+      return t;
+    });
+  }
+}
+				  </code>
+				</pre>
           </section>
           <section>
-            <h3>Flux</h3>
-            <img src="./imgs/flux-architecture.png" alt="Flux Architecture" />
-            <aside class="notes">
-              <ul>
-                <li>2014 von Facebook vorgestellt</li>
-              </ul>
-            </aside>
-          </section>
-          <section>
-            <h3>Reactive State</h3>
-			<img src="./imgs/clickstream.png" alt="Reactive Concept" />
+            <h3>Characteristics</h3>
+            <ul>
+              <li>Component specific</li>
+              <li>Angular out-of-the-box</li>
+              <li>Influenceable via property and event binding</li>
+              <li>Very limited</li>
+            </ul>
           </section>
         </section>
-        <section><h2>What is a State?</h2></section>
-        <section><h2>What is a State?</h2></section>
-        <section><h2>What is a State?</h2></section>
-        <section><h2>What is a State?</h2></section>
-        <section><h2>What is a State?</h2></section>
+        <section>
+          <section>
+            <h3>NgRx Store</h3>
+          </section>
+          <section>
+            <video
+              src="./imgs/ngrx-architecture.mp4"
+              data-autoplay
+              loop
+            ></video>
+          </section>
+          <section>
+            <h3>Actions</h3>
+            <pre><code class="typescript">
+  export class AddTodo implements Action {
+    readonly type = ADD_TODO;
+    constructor(public payload: any) {}
+  }
+
+  export class RemoveTodo implements Action {
+    readonly type = REMOVE_TODO;
+    constructor(public payload: any) {}
+  }
+								</code>
+							  </pre>
+          </section>
+          <section>
+            <h3>Dispatching Actions</h3>
+            <pre><code class="typescript">
+  addTodo(event: Todo) {
+    this.store.dispatch(new AddTodo(event));
+  }
+								</code>
+							  </pre>
+          </section>
+          <section>
+            <h3>Reducers</h3>
+            <pre><code class="typescript">
+  export function reducer(
+    state = initialState, action: TodossAction
+  ): TodosState {
+    switch (action.type) {
+      case ADD_TODO: {
+        const todo = action.payload;
+        const todos = [...state.todos, todo];
+        return { ...state, todos };
+      }
+    }
+    return state;
+  }
+								</code>
+							  </pre>
+          </section>
+
+          <section>
+            <h3>Selectors</h3>
+            <pre><code class="typescript">
+  import { createSelector } from '@ngrx/store';
+    
+  interface AppState { feature: FeatureState }
+  
+  const getTodos = (state: FeatureState) => state.todos;
+  const getFeatureState = (state: AppState) => state.feature;
+  const getFeatureStateTodos = createSelector(
+    getFeatureState, 
+    getTodos
+  );
+								</code>
+							  </pre>
+          </section>
+          <section>
+            <h3>Call Selector in Component</h3>
+            <pre><code class="typescript">
+  export class TodosComponent implements OnInit {
+    todos$: Observable&lt;Todo[]&gt;;
+
+    constructor(private store: Store&lt;TodosState&gt;) {}
+
+    ngOnInit() {
+      this.todos$ = this.store.select(getTodos);
+    }
+  }
+		   </code></pre>
+          </section>
+          <section>
+            <h3>Characteristics</h3>
+            <ul>
+              <li>Uniform state changes</li>
+              <li>clarity and transparency over the state</li>
+              <li>easy to test</li>
+              <li>strong influence on architecture</li>
+              <li>much additional code</li>
+            </ul>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h3>Reactive State</h3>
+          </section>
+          <section>
+            <h4>Angular Service Layer</h4>
+
+            <div class="content-cards" style="margin-top: 4rem">
+              <div class="content-card-wrapper">
+                <div class="cards">
+                  <div
+                    class="content-card rect fragment"
+                    data-fragment-index="1"
+                  >
+                    <img
+                      src="./imgs/angular-service.svg"
+                      width="60px"
+                      alt="Angular Logo"
+                    />
+                    <span><em>Store</em> Service</span>
+                  </div>
+                  <div
+                    class="content-card rect fragment"
+                    data-fragment-index="1"
+                  >
+                    <img
+                      src="./imgs/angular-service.svg"
+                      width="60px"
+                      alt="Angular Logo"
+                    />
+                    <span><em>Business</em> Service</span>
+                  </div>
+                  <div
+                    class="content-card rect fragment"
+                    data-fragment-index="1"
+                  >
+                    <img
+                      src="./imgs/angular-service.svg"
+                      width="60px"
+                      alt="Angular Logo"
+                    />
+                    <span><em>Adapter</em> Service</span>
+                  </div>
+                </div>
+                <div class="component-card fragment" data-fragment-index="2">
+                  <img
+                    src="./imgs/angular-component.svg"
+                    width="60px"
+                    alt="Angular Logo"
+                  />
+                  <span>Dialog Component</span>
+                </div>
+              </div>
+            </div>
+            <img
+              src="./imgs/arrow.svg"
+              data-fragment-index="6"
+              class="architecture-arrow fragment"
+              style="transform: rotate(360deg); top: 8rem; left: 334px"
+              alt=""
+            />
+            <img
+              src="./imgs/arrow.svg"
+              data-fragment-index="8"
+              class="architecture-arrow fragment"
+              style="transform: rotate(247deg); top: 301px; left: 20rem"
+              alt=""
+            />
+            <img
+              src="./imgs/arrow.svg"
+              data-fragment-index="3"
+              class="architecture-arrow fragment"
+              style="transform: rotate(101deg); top: 285px; left: 28rem"
+              alt=""
+            />
+            <img
+              src="./imgs/arrow.svg"
+              data-fragment-index="5"
+              class="architecture-arrow fragment"
+              style="transform: rotate(0deg); top: 8rem; left: 558px"
+              alt=""
+            />
+            <img
+              src="./imgs/arrow.svg"
+              data-fragment-index="4"
+              class="architecture-arrow fragment"
+              style="transform: rotate(180deg); top: 10rem; left: 36rem"
+              alt=""
+            />
+            <div
+              class="info-container fragment fade-in-then-out"
+              data-fragment-index="3"
+              style="top: 20rem; left: 31rem"
+            >
+              <p>Trigger State Change</p>
+            </div>
+            <div
+              class="info-container fragment fade-in-then-out"
+              data-fragment-index="4"
+              style="top: 7rem; left: 33rem"
+            >
+              <p>Request new data from backend</p>
+            </div>
+            <div
+              class="info-container fragment fade-in-then-out"
+              data-fragment-index="5"
+              style="top: 4rem; left: 33rem"
+            >
+              <p>Response with new data</p>
+            </div>
+            <div
+              class="info-container fragment fade-in-then-out"
+              data-fragment-index="6"
+              style="top: 11rem; left: 17rem"
+            >
+              <p>Save new data in store</p>
+            </div>
+            <div
+              class="info-container fragment fade-in-then-out"
+              data-fragment-index="8"
+              style="top: 20rem; left: 8rem"
+            >
+              <p>Inform dialog component</p>
+            </div>
+          </section>
+          <section>
+            <h3>Abstract Store Class</h3>
+
+            <ul>
+              <li>Parent class of all Store classes</li>
+              <li>Provides update logic</li>
+              <li>Provides state observable</li>
+              <li>Provides selector</li>
+            </ul>
+          </section>
+          <section>
+            <h3>Abstract Store Class</h3>
+
+             <pre><code class="typescript"  data-line-numbers="1|2-3|4|6-8|10|32-34|13-19|22-30|1-35">export abstract class Store&lt;State extends object&gt; {
+  private readonly actionSource: Subject&lt;Action&lt;State&gt;&gt;;
+  private readonly stateSource: BehaviorSubject&lt;State&gt;;
+  readonly state$: Observable&lt;State&gt;;
+
+  constructor(initialState: State) {
+    this.stateSource = new BehaviorSubject&lt;State&gt;(
+      initialState
+    );
+    this.state$ = this.stateSource.asObservable();
+    this.actionSource = new Subject&lt;Action&lt;State&gt;&gt;();
+
+    this.actionSource.pipe(
+      observeOn(queueScheduler)
+    ).subscribe(action => {
+      const currentState = this.stateSource.getValue();
+      const nextState = action(currentState);
+      this.stateSource.next(nextState);
+    });
+  }
+
+  select&lt;SelectedState&gt;(
+    selector: (state: State) => SelectedState
+  ): Observable&lt;SelectedState&gt; {
+    return this.state$.pipe(
+      map(selector),
+      map(state => structuredClone(state)),
+      distinctUntilObjectChanged()
+    );
+  }
+
+  update(stateChanger: (state: State) => State) {
+    this.actionSource.next(stateChanger);
+  }
+}
+						 </code></pre>
+          </section>
+        </section>
       </div>
     </div>
 
