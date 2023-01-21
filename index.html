@@ -391,6 +391,76 @@
 }
 						 </code></pre>
           </section>
+		  <section>
+            <h3>Feature Store Class</h3>
+            <pre><code class="typescript">  @Injectable({
+    providedIn: 'root',
+  })
+  export class TodoStoreService extends Store&lt;TodoStoreState&gt; {
+    constructor() {
+      super('TodoStore', { todos: [] });
+    }
+
+    addTodo(todo: Todo) {
+      this.update(state => ({
+        ...state,
+        todos: [
+          ...state.todos,
+          todo
+        ],
+    }));
+  }
+		   </code></pre>
+          </section>
+
+		  <section>
+            <h3>Dialog Component</h3>
+            <pre><code class="typescript">  export class TodoComponent {
+    readonly allTodos$: Observable&lt;Todo[]&gt;;
+
+    constructor(
+      private todoService: TodoService,
+      private todoStore: TodoStoreService
+    ) {
+      this.allTodos$ = this.todoStore.select(
+        state => state.todos
+      );
+    }
+
+    addTodo(description: string) {
+      this.todoService.addTodo(description);
+    }
+  }
+		   </code></pre>
+          </section>
+		  <section>
+            <h3>Business Service</h3>
+            <pre><code class="typescript">  export class TodoService {
+    
+    constructor(
+      private todoAdapter: TodoAdapterService,
+      private todoStore: TodoStoreService
+    ) { }
+
+    async addTodo(description: string) {
+      const todo = await lastValueFrom(
+        this.todoAdapter.addTodo(description)
+      );
+      this.todoStore.addTodo(todo);
+    }
+  }
+		   </code></pre>
+          </section>
+		  <section>
+            <h3>Characteristics</h3>
+            <ul>
+              <li>Uniform state changes</li>
+              <li>Fits into the modul's service layer</li>
+			  <li>No additional dependency</li>
+              <li>Modular state</li>
+			  <li>Customizable</li>
+            </ul>
+          </section>
         </section>
       </div>
     </div>
