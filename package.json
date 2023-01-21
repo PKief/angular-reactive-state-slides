@@ -1,7 +1,7 @@
 {
-  "name": "reveal.js",
-  "version": "4.4.0",
-  "description": "The HTML Presentation Framework",
+  "name": "angular-reactive-state-slides",
+  "version": "1.0.0",
+  "description": "Angular Reactive State Slides",
   "homepage": "https://revealjs.com",
   "subdomain": "revealjs",
   "main": "dist/reveal.js",
@@ -12,14 +12,9 @@
     "start": "gulp serve",
     "build": "gulp build"
   },
-  "author": {
-    "name": "Hakim El Hattab",
-    "email": "hakim.elhattab@gmail.com",
-    "web": "https://hakim.se"
-  },
   "repository": {
     "type": "git",
-    "url": "git://github.com/hakimel/reveal.js.git"
+    "url": "git://github.com/pkief/angular-reactive-state-slides.git"
   },
   "engines": {
     "node": ">=10.0.0"
