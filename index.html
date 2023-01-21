@@ -1,40 +1,99 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
 
-		<title>reveal.js</title>
+    <title>reveal.js</title>
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css">
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/black.css" />
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section
+          data-background-image="./imgs/title-image.jpg"
+          data-background-size="100%"
+          class="title-slide"
+        >
+          <img src="./imgs/angular.svg" width="200px" alt="Angular Logo" />
+          <h1>Reactive State</h1>
+          <p>How to manage state in Angular - the reactive way</p>
+        </section>
+        <section>
+          <section>
+            <h2>What is a State?</h2>
+          </section>
+          <section>
+            <img src="./imgs/state-function.png" alt="State Function" />
+            <aside class="notes">
+              Every state is represented by its unique visual appearance on the
+              screen.
+            </aside>
+          </section>
+          <section>
+            <h3>State changes are produced by</h3>
+            <ul>
+              <li>User Interaction</li>
+              <li>Data loaded from Backend</li>
+              <li>Component Exchange (Routing)</li>
+              <li>Internationalization</li>
+              <li>Authorization</li>
+              <li>Theming</li>
+              <li>...</li>
+            </ul>
+          </section>
+        </section>
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
+        <section>
+          <section><h2>Known State Management Patterns</h2></section>
+          <section>
+            <h3>Local state</h3>
+          </section>
+          <section>
+            <h3>Flux</h3>
+            <img src="./imgs/flux-architecture.png" alt="Flux Architecture" />
+            <aside class="notes">
+              <ul>
+                <li>2014 von Facebook vorgestellt</li>
+              </ul>
+            </aside>
+          </section>
+          <section>
+            <h3>Reactive State</h3>
+			<img src="./imgs/clickstream.png" alt="Reactive Concept" />
+          </section>
+        </section>
+        <section><h2>What is a State?</h2></section>
+        <section><h2>What is a State?</h2></section>
+        <section><h2>What is a State?</h2></section>
+        <section><h2>What is a State?</h2></section>
+        <section><h2>What is a State?</h2></section>
+      </div>
+    </div>
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
 </html>
