@@ -1,3 +1,8 @@
+.author {
+  font-size: 27px;
+  color: #cfd8dc;
+}
+
 .content-cards {
   display: flex;
   flex-direction: row;
@@ -109,5 +114,19 @@ img.architecture-arrow {
   p {
     margin: 0 !important;
     padding: 0;
+  }
+}
+
+a.button-link {
+  background: #ffffffcd;
+  padding: 1rem 1.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.5rem;
+  backdrop-filter: blur(5px);
+  transition: background ease 0.5s;
+
+  &:hover {
+    background: #fff;
   }
 }
