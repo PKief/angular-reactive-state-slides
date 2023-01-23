@@ -27,24 +27,24 @@
           <img src="./imgs/angular.svg" width="200px" alt="Angular Logo" />
           <h1>Reactive State</h1>
           <p>How to manage state in Angular - the reactive way</p>
-		  <p>
-			<em class="author">Philipp Kief | 2023</em>
-		  </p>
+          <p>
+            <em class="author">Philipp Kief | 2023</em>
+          </p>
         </section>
         <section>
           <section>
             <h2>What is a State? 🧐</h2>
           </section>
-          
-	  <section>
+
+          <section>
             <img src="./imgs/state-function.png" alt="State Function" />
             <aside class="notes">
               Every state is represented by its unique visual appearance on the
               screen.
             </aside>
           </section>
-		
-	  <section>
+
+          <section>
             <h3>State changes are produced by</h3>
             <ul>
               <li>User Interaction</li>
@@ -359,7 +359,7 @@
           <section>
             <h3>Abstract Store Class</h3>
 
-             <pre><code class="typescript"  data-line-numbers="1|2-3|4|6-8|10|32-34|13-19|22-30|1-35">export abstract class Store&lt;State extends object&gt; {
+            <pre><code class="typescript"  data-line-numbers="1|2-3|4|6-8|10|32-34|13-19|22-30|1-35">export abstract class Store&lt;State extends object&gt; {
   private readonly actionSource: Subject&lt;Action&lt;State&gt;&gt;;
   private readonly stateSource: BehaviorSubject&lt;State&gt;;
   readonly state$: Observable&lt;State&gt;;
@@ -395,11 +395,12 @@
   }
 }
 						 </code></pre>
-		   <aside class="notes">
-              The queueScheduler ensures that the operations of the action callback are all executed in the same macrotask.
+            <aside class="notes">
+              The queueScheduler ensures that the operations of the action
+              callback are all executed in the same macrotask.
             </aside>
           </section>
-		  <section>
+          <section>
             <h3>Feature Store Class</h3>
             <pre><code class="typescript">  @Injectable({
     providedIn: 'root',
@@ -421,7 +422,7 @@
 		   </code></pre>
           </section>
 
-		  <section>
+          <section>
             <h3>Dialog Component</h3>
             <pre><code class="typescript">  export class TodoComponent {
     readonly allTodos$: Observable&lt;Todo[]&gt;;
@@ -441,7 +442,7 @@
   }
 		   </code></pre>
           </section>
-		  <section>
+          <section>
             <h3>Business Service</h3>
             <pre><code class="typescript">  export class TodoService {
     
@@ -459,27 +460,42 @@
   }
 		   </code></pre>
           </section>
-		  <section>
+          <section>
             <h3>Characteristics</h3>
             <ul>
               <li>Uniform state changes</li>
               <li>Fits into the modul's service layer</li>
-			  <li>No additional dependency</li>
+              <li>No additional dependency</li>
               <li>Modular state</li>
-			  <li>Customizable</li>
+              <li>Customizable</li>
             </ul>
           </section>
-		  <section data-background-image="./imgs/demo-background.jpg"
-          data-background-size="100%">
+          <section
+            data-background-image="./imgs/demo-background.jpg"
+            data-background-size="100%"
+          >
             <h3>Demo</h3>
-            <a class="button-link" href="https://github.com/PKief/angular-reactive-state/tree/main/playground">Link to playground</a>
+            <a
+              class="button-link"
+              href="https://github.com/PKief/angular-reactive-state/tree/main/playground"
+              >Link to playground</a
+            >
           </section>
-		  <section>
+          <section>
             <h3>Similar libraries</h3>
             <ul>
-              <li><a href="https://opensource.salesforce.com/akita/">Akita Store</a></li>
-              <li><a href="https://www.rx-angular.io/docs/state">Rx Angular State</a></li>
               <li><a href="https://ngneat.github.io/elf/">Elf</a></li>
+              <li>
+                <a href="https://opensource.salesforce.com/akita/"
+                  >Akita Store</a
+                >
+              </li>
+              <li>
+                <a href="https://www.rx-angular.io/docs/state"
+                  >Rx Angular State</a
+                >
+              </li>
+              <li><a href="https://www.npmjs.com/package/angular-reactive-state">Angular Reactive State</a></li>
             </ul>
           </section>
         </section>
